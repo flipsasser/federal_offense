@@ -61,6 +61,23 @@ rails federal_offense:clear_inbox
 
 ...which will, you know, get rid of those pesky files. Maybe I'll add some auto-cache-clearing in the future; I dunno, I'm sleepy.
 
+## Why????
+
+This is here because, FFS, previewing email in Rails is important. Since time immemorial, Mailcatcher has been the gold standard - and it very much still is, *especially* if you're not using Rails (but if you're not using Rails, you can **very, very, VERY safely close this browser tab** because I am adding no value to your life whatsoever).
+
+**HOWEVER,** it's a real PITA to point a Docker instance to a Mailcatcher SMTP server. So I did this instead. Enjoy. Or don't; I don't actually care.
+
+## Switching from Mailcatcher
+
+If you've been using Mailcatcher and want to stop, which for the record I think Mailcatcher is an absolutely amazing library that has made my life infinitely better for years and should by all means continue to be used by you and everyone else you know, including the people you know who don't know how to write code or what Mailcatcher or SMTP is, which is probably most of them, you should know that FederalOffense **does not spin up an SMTP server.**
+
+What this means for you, practically, is that you may have done one, possibly, two things. Those things are:
+
+1. Set `raise_delivery_errors` to `true` somewhere in your environments (presumably `config/environments/development.rb`). If that's the case, **you may want to switch that back off if you're pointing to a Mailcatcher SMTP server you no longer intend to use, which again, use Mailcatcher it's freakin awesome, even though this gem was specifically designed to replace it which doesn't mean I don't absolutely love that gem or the people who made it.**
+2. Configured `smtp_settings` to point to Mailcatcher, also probably in `config/environments/development.rb`. If that's the case, you can maybe delete that? I dunno. Your call.
+
+Anyhoo. The important thing is **Federal Offense will not boot an SMTP server so if you turn Mailcatcher off and keep pointing to its (now-disappeared) SMTP endpoint, you will be disappointed**.
+
 ## PRODUCTION WARNING FOR THE LOVE OF GOD HEED MINE WORDS
 
 As I've covered exhaustively thus far, this is a Rails engine which makes **all of the email** your app generates **available** at a **publicly accessible URL.** What this means for you is, **NEVER EVER EVER EVER EVER EVER EVER EVER EVER** let this thing leak out into production.
