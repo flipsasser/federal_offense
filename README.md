@@ -3,7 +3,9 @@
 Federal Offense intercepts outbound emails in Rails and allows you to preview them in your browser. It's like Rails mailer previews, but it doesn't make you write code. It's like Mailcatcher, but doesn't install Eventmachine and can be run inside a Docker container without problems.
 
 <div style="margin: 1em 3em;">
+
 ![Screenshot of Federal Offense inbox](https://github.com/flipsasser/federal_offense/blob/master/screenshot.png?raw=true)
+
 </div>
 
 ## Installation
