@@ -8,6 +8,18 @@ Federal Offense intercepts outbound emails in Rails and allows you to preview th
 
 </div>
 
+### Table of contents
+
+aka "Proof that I love you"
+
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [Reason this Exists](#why-does-this-exist)
+4. [Switching from Mailcatcher](#switching-from-mailcatcher)
+5. [OH MY GOD THIS SECTION IS SO IMPORTANT WHY IS IT NEAR THE END OF THE README](#production-warning-for-the-love-of-god-heed-mine-words)
+6. [Contributing](#contributing)
+7. [Leesawns](#license)
+
 ## Installation
 
 Federal Offense assumes you're on the latest Rails (Rails 6). It does this because I'm using the latest Rails (Rails 6).
@@ -61,7 +73,7 @@ rails federal_offense:clear_inbox
 
 ...which will, you know, get rid of those pesky files. Maybe I'll add some auto-cache-clearing in the future; I dunno, I'm sleepy.
 
-## Why????
+## Why does this exist????
 
 This is here because, FFS, previewing email in Rails is important. Since time immemorial, Mailcatcher has been the gold standard - and it very much still is, *especially* if you're not using Rails (but if you're not using Rails, you can **very, very, VERY safely close this browser tab** because I am adding no value to your life whatsoever).
 
