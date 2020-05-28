@@ -7,7 +7,7 @@ module FederalOffense
     isolate_namespace FederalOffense
 
     class << self
-      attr_accessor :server
+      attr_accessor :cable_server
 
       def cable_config
         @cable_config ||= ActionCable::Server::Configuration.new.tap do |config|
@@ -18,12 +18,21 @@ module FederalOffense
       end
     end
 
-    # Register ourselves as an interceptor of outbound emails
-    config.after_initialize do
+    # Precompile the assets we need to run this thing
+    initializer "federal_offense.assets.precompile" do |app|
+      app.config.assets.precompile += %w[federal_offense/application.css federal_offense/application.js federal_offense/cable.js]
+    end
+
+    # Register as an interceptor of outbound emails
+    initializer "action_mailer" do |app|
+      if Rails.env.production?
+        abort %{[FEDERAL OFFENSE] CRITICAL NIGHTMARE SCENARIO: YOU INSTALLED FEDERAL OFFENSE IN PRODUCTION\n\nPlease ensure `gem "federal_offense"` appears only in your development Gemfile group (and maybe test, but even that's stretching it).}
+      end
+
       ActionMailer::Base.register_interceptor(FederalOffense::Interceptor)
     end
 
-    # Set up ActionCable if the app has it loaded
+    # Enable ActionCable connections in the inbox for auto-reload
     initializer "action_cable_connection" do |app|
       # Find cable configs
       federal_offense_config_path = Rails.root.join("config", "federal_offense_cable.yml")
@@ -39,18 +48,10 @@ module FederalOffense
         {adapter: "async"}
       end
 
-      # Prefix the ActionCable configuration with a channel prefix (for benefit of separating app
-      # and engine channels)
-      # config[:channel_prefix] = [config[:channel_prefix], "federal_offense"].reject(&:blank?).join("_")
-
       # Assign the values to the cable config and create a server
       self.class.cable_config.cable = config
-      self.class.server = ActionCable::Server::Base.new(config: self.class.cable_config)
+      self.class.cable_server = ActionCable::Server::Base.new(config: self.class.cable_config)
       FederalOffense.action_cable = true
-    end
-
-    initializer "federal_offense.assets.precompile" do |app|
-      app.config.assets.precompile += %w[federal_offense/application.css federal_offense/application.js federal_offense/cable.js]
     end
   end
 end

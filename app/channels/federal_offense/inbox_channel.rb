@@ -3,7 +3,7 @@
 module FederalOffense
   class InboxChannel < FederalOffense::ApplicationCable::Channel
     def self.broadcast!(message: {reload: true})
-      FederalOffense::Engine.server.broadcast(name, message)
+      FederalOffense::Engine.cable_server.broadcast(name, message)
     end
 
     def subscribed
