@@ -1,0 +1,13 @@
+.message-header {
+  background-color: whitesmoke;
+  border-bottom: 1px solid lightgray;
+  display: block;
+  padding: 0.8rem 0.6rem;
+}
+
+.message-body {
+  border-width: 0;
+  display: block;
+  flex: 1;
+  width: 100%;
+}

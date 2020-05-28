@@ -1,0 +1,27 @@
+.empty {
+  align-items: center;
+  border-radius: 1rem;
+  border: 3px dashed lightgray;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  margin: 1rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.empty .empty-title {
+  color: gray;
+  display: block;
+  font-weight: bold;
+}
+
+.empty .empty-subtitle {
+  color: gray;
+  display: block;
+}
+
+.empty .empty-title + .empty-subtitle {
+  margin-top: 0.8rem;
+}

@@ -1,0 +1,18 @@
+table {
+  border-collapse: collapse;
+  border-width: 0;
+}
+
+table th,
+table td {
+  padding: 0.2rem 0.4rem;
+}
+
+table th {
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-align: right;
+  text-transform: uppercase;
+  vertical-align: bottom;
+  white-space: nowrap;
+}

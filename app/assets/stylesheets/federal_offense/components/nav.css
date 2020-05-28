@@ -1,0 +1,30 @@
+nav {
+  border-bottom: 1px solid lightgray;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-items {
+  align-items: stretch;
+  display: flex;
+  list-style-type: none;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-items .nav-item.nav-item--logo {
+  font-weight: bold;
+}
+
+.nav-items .nav-item + .nav-item {
+  border-left: 1px solid lightgray;
+}
+
+.nav-items .nav-item a {
+  color: inherit;
+  display: block;
+  padding: 1rem;
+  text-decoration: none;
+}

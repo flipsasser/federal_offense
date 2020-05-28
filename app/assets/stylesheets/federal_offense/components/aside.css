@@ -1,0 +1,9 @@
+aside {
+  display: flex;
+  flex: 1;
+}
+
+aside:not(:last-child) {
+  flex: auto;
+  max-width: 300px;
+}

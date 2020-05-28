@@ -1,0 +1,30 @@
+<header class="message-header">
+  <table>
+    <tbody>
+      <tr>
+        <th><%= t("attributes.date") %></th>
+        <td><%= message.date %></td>
+      </tr>
+      <tr>
+        <th><%= t("attributes.from") %></th>
+        <td><%= message_array(message.from) %></td>
+      </tr>
+      <tr>
+        <th><%= t("attributes.to") %></th>
+        <td><%= message_array(message.to) %></td>
+      </tr>
+      <tr>
+        <th><%= t("attributes.subject") %></th>
+        <td><%= message.subject %></td>
+      </tr>
+    </tbody>
+  </table>
+</header>
+<iframe class="message-body" src="<%= federal_offense.message_path(message.id, raw: true) %>">
+</iframe>
+<%# <footer class="message-footer">
+  <ul class="tabs">
+    <li class="tab"><a href="#html">HTML</a></li>
+    <li class="tab"><a href="#text">Text</a></li>
+  </ul>
+</footer> %>

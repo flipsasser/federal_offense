@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Federal Offense: <%= message ? message.subject : "Inbox#{" (#{messages.size})" if messages.any?}" %></title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "federal_offense/application", media: "all" %>
+    <% if FederalOffense.action_cable %>
+      <meta name="action-cable-url" content="<%= "#{federal_offense.messages_path}#{FederalOffense::Engine.cable_config.mount_path}" %>" />
+    <% end %>
+  </head>
+  <body>
+    <main>
+      <nav>
+        <ul class="nav-items">
+          <li class="nav-item nav-item--logo"><%= link_to "Federal Offense", federal_offense.messages_path %></li>
+          <li class="nav-item nav-item--subnav">
+            <ul class="nav-items">
+              <li class="nav-item">
+                <% if message.present? %>
+                  <%=
+                    link_to(
+                      t("destroy.one"),
+                      federal_offense.destroy_message_path(message.id),
+                      data: {confirm: t("destroy.confirm_one")},
+                      method: :post,
+                    )
+                  %>
+                <% else %>
+                  <%=
+                    link_to(
+                      t("destroy.one"),
+                      "#",
+                      class: "nav-item-disabled",
+                      disabled: true,
+                    )
+                  %>
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <% if messages.any? %>
+                  <%=
+                    link_to(
+                      t("destroy.all"),
+                      federal_offense.destroy_all_messages_path,
+                      data: {confirm: t("destroy.confirm_all")},
+                      method: :post,
+                    )
+                  %>
+                <% else %>
+                  <%=
+                    link_to(
+                      t("destroy.all"),
+                      "#",
+                      class: "nav-item-disabled",
+                      disabled: true,
+                    )
+                  %>
+                <% end %>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article>
+        <aside>
+          <ul class="list">
+            <% if messages.any? %>
+              <% messages.each do |message| %>
+                <li class="list-item list-item--has-link list-item--<%= message.read? ? "read" : "unread" %><%= " list-item--active" if message == self.message %>">
+                  <%= link_to federal_offense.message_path(message.id), class: "list-item-link" do %>
+                    <span class="list-item-subtitle"><%= message_array(message.from) %></span>
+                    <span class="list-item-title"><%= message.subject %></span>
+                    <span class="list-item-body"><%= message.preview %></span>
+                  <% end%>
+                </li>
+              <% end %>
+            <% else %>
+              <li class="list-item empty">
+                <div class="empty-title"><%= t("empty.title") %></div>
+                <div class="empty-subtitle"><%= t("empty.subtitle") %></div>
+              </li>
+            <% end %>
+          </ul>
+        </aside>
+        <% if messages.any? %>
+          <section>
+            <%= yield %>
+          </section>
+        <% end %>
+      </article>
+    </main>
+    <%= javascript_include_tag "federal_offense/application" %>
+    <%= javascript_include_tag "federal_offense/cable" if FederalOffense.action_cable %>
+  </body>
+</html>

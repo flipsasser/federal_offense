@@ -1,0 +1,6 @@
+section {
+  border-left: 1px solid lightgray;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}

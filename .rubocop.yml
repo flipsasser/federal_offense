@@ -1,0 +1,78 @@
+require:
+  - rubocop-ordered_methods
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+  - standard
+
+inherit_gem:
+  rubocop-ordered_methods:
+    - config/default.yml
+  rubocop-performance:
+    - config/default.yml
+  rubocop-rails:
+    - config/default.yml
+  rubocop-rspec:
+    - config/default.yml
+  standard:
+    - config/base.yml
+
+AllCops:
+  Exclude:
+    - "bin/**/*"
+    - "coverage/**/*"
+    - "db/migrate/*"
+    - "db/schema.rb"
+    - "lib/enum_migration.rb"
+    - "log/**/*"
+    - "node_modules/**/*"
+    - "public/**/*"
+    - "tmp/**/*"
+    - "vendor/**/*"
+
+Rails/FilePath:
+  EnforcedStyle: arguments
+
+Rails/HelperInstanceVariable:
+  Enabled: false
+
+Rails/RakeEnvironment:
+  Enabled: false
+
+Rails/SkipsModelValidations:
+  Enabled: true
+  Exclude:
+    - spec/**/*
+
+RSpec/Dialect:
+  Enabled: true
+  PreferredMethods:
+    context: describe
+
+RSpec/ExampleLength:
+  Exclude:
+    - spec/features/**/*
+  Max: 15
+
+RSpec/MultipleExpectations:
+  Exclude:
+    - spec/controllers/**/*
+  Max: 2
+
+RSpec/NestedGroups:
+  Max: 4
+
+RSpec/SharedExamples:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma

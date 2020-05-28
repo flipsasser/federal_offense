@@ -1,0 +1,5 @@
+article {
+  align-items: stretch;
+  flex: 1;
+  display: flex;
+}

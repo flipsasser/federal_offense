@@ -1,0 +1,87 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.list .list-item {
+  position: relative;
+}
+
+/* Link styling */
+.list .list-item .list-item-link {
+  color: inherit;
+  display: block;
+  padding: 1rem 1rem 1rem 2rem;
+  text-decoration: none;
+}
+
+/* Text content */
+.list .list-item .list-item-title,
+.list .list-item .list-item-subtitle,
+.list .list-item .list-item-content {
+  display: block;
+}
+
+.list .list-item .list-item-title,
+.list .list-item .list-item-subtitle {
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.list .list-item .list-item-subtitle {
+  color: gray;
+  font-size: 0.8rem;
+}
+
+.list .list-item .list-item-title {
+}
+
+.list .list-item .list-item-content {
+  font-size: 0.6rem;
+}
+
+/* Adjacent list items */
+.list .list-item + .list-item {
+  border-top: 1px solid lightgray;
+}
+
+/* Status indicators */
+.list .list-item.list-item--unread::before {
+  border-radius: 1000px;
+  content: "";
+  height: 0.5rem;
+  left: 1rem;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.5rem;
+}
+
+.list .list-item.list-item--unread::before {
+  background-color: steelblue;
+}
+
+/* Active state */
+.list .list-item.list-item--active {
+  background-color: steelblue;
+}
+
+.list-item.list-item--active.list-item--unread::before {
+  background-color: white !important;
+}
+
+.list .list-item.list-item--active .list-item-link,
+.list .list-item.list-item--active .list-item-subtitle {
+  color: white;
+}
+
+.list .list-item.list-item--active + .list-item,
+.list .list-item + .list-item.list-item--active {
+  border-top-color: steelblue;
+}
