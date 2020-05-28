@@ -1,17 +1,18 @@
 en:
-  attributes:
-    date: "Date"
-    from: "From"
-    subject: "Subject"
-    to: "To"
-  destroy:
-    all: "Clear Inbox"
-    one: "Delete This Message"
-    confirm_all: "Are you sure you want to delete all the messages in the inbox?"
-    confirm_one: "Are you sure you want to delete this message?"
-  empty:
-    title: "Nothing to see here!"
-    subtitle: "Generate a message from ActionMailer and then come back here"
-  unselected:
-    title: "Select a message to view it here"
-    subtitle: "← look over there"
+  federal_offense:
+    attributes:
+      date: "Date"
+      from: "From"
+      subject: "Subject"
+      to: "To"
+    destroy:
+      all: "Clear Inbox"
+      one: "Delete This Message"
+      confirm_all: "Are you sure you want to delete all the messages in the inbox?"
+      confirm_one: "Are you sure you want to delete this message?"
+    empty:
+      title: "Nothing to see here!"
+      subtitle: "Generate a message from ActionMailer and then come back here"
+    unselected:
+      title: "Select a message to view it here"
+      subtitle: "← look over there"

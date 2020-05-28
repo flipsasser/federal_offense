@@ -62,8 +62,19 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
+    addressable (2.7.0)
+      public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.0)
     builder (3.2.4)
+    capybara (3.32.2)
+      addressable
+      mini_mime (>= 0.1.3)
+      nokogiri (~> 1.8)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      regexp_parser (~> 1.5)
+      xpath (~> 3.2)
+    coderay (1.1.2)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
     diff-lcs (1.3)
@@ -89,8 +100,14 @@ GEM
     nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
     parallel (1.19.1)
-    parser (2.7.1.2)
+    parser (2.7.1.3)
       ast (~> 2.4.0)
+    pry (0.13.1)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+    pry-rails (0.3.9)
+      pry (>= 0.10.4)
+    public_suffix (4.0.5)
     rack (2.2.2)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -122,6 +139,7 @@ GEM
       thor (>= 0.20.3, < 2.0)
     rainbow (3.0.0)
     rake (13.0.1)
+    regexp_parser (1.7.0)
     rexml (3.2.4)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
@@ -179,18 +197,24 @@ GEM
       rubocop-performance (~> 1.5.2)
     thor (1.0.1)
     thread_safe (0.3.6)
+    timecop (0.9.1)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
     unicode-display_width (1.7.0)
     websocket-driver (0.7.2)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
+    xpath (3.2.0)
+      nokogiri (~> 1.8)
     zeitwerk (2.3.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  capybara
+  federal_offense!
+  pry-rails
   rspec (~> 3.9)
   rspec-rails
   rubocop (~> 0.8)
@@ -199,9 +223,9 @@ DEPENDENCIES
   rubocop-rails (~> 2.5.2)
   rubocop-rspec (~> 1.39)
   simplecov
-  federal_offense!
   sqlite3
   standard (~> 0.4)
+  timecop
 
 BUNDLED WITH
    2.1.4

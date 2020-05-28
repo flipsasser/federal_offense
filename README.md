@@ -56,7 +56,7 @@ Anyhoo, that's that.
 Federal Offense caches all of your email as JSON in `tmp/federal_offense`. You may want to blast that out periodically. One option is to run
 
 ```sh
-rails federal_offense:clear_cache
+rails federal_offense:clear_inbox
 ```
 
 ...which will, you know, get rid of those pesky files. Maybe I'll add some auto-cache-clearing in the future; I dunno, I'm sleepy.
@@ -71,7 +71,7 @@ As I've covered exhaustively thus far, this is a Rails engine which makes **all 
 
 ## Contributing
 
-Create a pull request. This is a simple little library with no test coverage. Oh I should write tests. I normally do. I just, you know... didn't this time.
+Create a pull request. This is a simple little library with ~~no test coverage~~ some test coverage (gosh). Oh I should write tests. I normally do. I just, you know... didn't this time.
 
 ## License
 

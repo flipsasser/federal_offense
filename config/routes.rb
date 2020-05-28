@@ -5,7 +5,7 @@ FederalOffense::Engine.routes.draw do |*args|
     mount FederalOffense::Engine.cable_server => FederalOffense::Engine.cable_config.mount_path
   end
 
-  resources :messages, only: %i[index show update], path: "" do
+  resources :messages, only: %i[index show], path: "" do
     member do
       post :destroy, as: :destroy, path: "destroy"
     end

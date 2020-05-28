@@ -2,7 +2,7 @@
 
 module FederalOffense
   class MessagesController < FederalOffense::ApplicationController
-    before_action :require_message, only: %i[destroy show update]
+    before_action :require_message, only: %i[destroy show]
     after_action :mark_as_read, only: %i[show]
 
     def destroy
@@ -19,12 +19,16 @@ module FederalOffense
     end
 
     def show
-      render html: message.body if params[:raw]
-    end
-
-    def update
-      message.update(read_at: Time.zone.now) unless message.read?
-      redirect_to messages_path
+      if params[:raw]
+        case params[:type]
+        when "html"
+          render html: message.html_body
+        when "text"
+          render plain: message.text_body
+        else
+          render message.html? ? {html: message.html_body} : {plain: message.text_body}
+        end
+      end
     end
 
     private
@@ -45,7 +49,7 @@ module FederalOffense
     helper_method :messages
 
     def require_message
-      raise ActiveRecord::RecordNotFound if message.blank?
+      redirect_to messages_path if message.blank?
     end
   end
 end

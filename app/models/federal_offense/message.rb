@@ -4,9 +4,13 @@ module FederalOffense
   class Message < OpenStruct
     ROOT = Rails.root.join("tmp", "federal_offense").freeze
 
+    EMPTY_TEXT_BODY = "No message content"
+    EMPTY_HTML_BODY = "<html><body><em>#{EMPTY_TEXT_BODY}</em></body></html>"
+    EMPTY_SUBJECT = "(no subject)"
+
     class << self
       def all
-        Dir[ROOT.join("**", "*.json")].map { |message|
+        Dir[ROOT.join("*.json")].map { |message|
           read(message)
         }.sort_by(&:date)
       end
@@ -22,17 +26,27 @@ module FederalOffense
         FileUtils.mkdir_p(ROOT)
         path = ROOT.join("#{id}.json")
 
+        html, text = if message.parts.any?
+          [message.html_part&.body, message.text_part&.body]
+        else
+          is_html = message.content_type.match?(/html/i)
+          [
+            is_html ? message.body : nil,
+            is_html ? nil : message.body,
+          ]
+        end
+
         # Set up some default attributes
         attributes = {
           bcc: message.bcc,
           cc: message.cc,
           date: timestamp,
           from: message.from,
-          html: message.html_part&.body,
+          html: html,
           id: id,
           path: path,
           subject: message.subject,
-          text: message.text_part&.body,
+          text: text,
           to: message.to,
         }
 
@@ -60,12 +74,6 @@ module FederalOffense
       @table.as_json(*args)
     end
 
-    def body
-      body = html && html["raw_source"]
-      body ||= "<html><body>No message content</body></html>"
-      body.html_safe # rubocop:disable Rails/OutputSafety
-    end
-
     def date
       @date ||= Time.zone.at(super)
     end
@@ -73,6 +81,14 @@ module FederalOffense
     def destroy
       FileUtils.rm_rf(ROOT.join(id))
       File.unlink(path)
+    end
+
+    def html?
+      html.present?
+    end
+
+    def html_body
+      (html || {}).fetch("raw_source", EMPTY_HTML_BODY).html_safe # rubocop:disable Rails/OutputSafety
     end
 
     def read?
@@ -90,7 +106,15 @@ module FederalOffense
     end
 
     def subject
-      super.presence || "(no subject)"
+      super.presence || EMPTY_SUBJECT
+    end
+
+    def text?
+      text.present?
+    end
+
+    def text_body
+      (text || {}).fetch("raw_source", EMPTY_TEXT_BODY)
     end
 
     def unread?
