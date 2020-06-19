@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_dependency "federal_offense/action_cable" if defined? ActionCable
 require_dependency "federal_offense/interceptor"
 
 module FederalOffense
@@ -10,9 +11,9 @@ module FederalOffense
       attr_accessor :cable_server
 
       def cable_config
-        @cable_config ||= ActionCable::Server::Configuration.new.tap do |config|
+        @cable_config ||= ::ActionCable::Server::Configuration.new.tap do |config|
           config.logger = Rails.logger
-          config.connection_class = -> { FederalOffense::ApplicationCable::Connection }
+          config.connection_class = -> { FederalOffense::ActionCable::Connection }
           config.mount_path = "cable"
         end
       end
@@ -34,7 +35,10 @@ module FederalOffense
 
     # Enable ActionCable connections in the inbox for auto-reload
     initializer "action_cable_connection" do |app|
-      if defined? ActionCable
+      if defined? ::ActionCable
+        # Activate ActionCable
+        FederalOffense.action_cable = true
+
         # Find cable configs
         federal_offense_config_path = Rails.root.join("config", "federal_offense_cable.yml")
         app_config_path = Rails.root.join("config", "cable.yml")
@@ -51,8 +55,9 @@ module FederalOffense
 
         # Assign the values to the cable config and create a server
         self.class.cable_config.cable = config
-        self.class.cable_server = ActionCable::Server::Base.new(config: self.class.cable_config)
-        FederalOffense.action_cable = true
+        self.class.cable_server = ::ActionCable::Server::Base.new(config: self.class.cable_config)
+      else
+        FederalOffense.action_cable = false
       end
     end
   end

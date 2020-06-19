@@ -1,7 +1,7 @@
 //= require ./vendor/action_cable
 
 const consumer = ActionCable.createConsumer()
-consumer.subscriptions.create("FederalOffense::InboxChannel", {
+consumer.subscriptions.create("FederalOffense::ActionCable::InboxChannel", {
   connected: () => {
     /* NOOP */
   },
