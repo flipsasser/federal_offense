@@ -55,7 +55,7 @@ RSpec.describe FederalOffense::MessagesController do
       it "shows a list of messages" do
         get :index
         messages.each do |message|
-          expect(response.body).to have_css("aside .list .list-item-title", text: message.subject)
+          expect(response.body).to have_css("aside .message .message-subject", text: message.subject)
         end
       end
 
@@ -135,10 +135,10 @@ RSpec.describe FederalOffense::MessagesController do
 
       it "still shows the message as 'new' in the interface the first time it's viewed" do
         get :show, params: {id: message.id}
-        expect(response.body).to have_css("aside .list .list-item.list-item--unread")
+        expect(response.body).to have_css("aside .messages .message.message--unread")
 
         get :show, params: {id: message.id}
-        expect(response.body).not_to have_css("aside .list .list-item.list-item--unread")
+        expect(response.body).not_to have_css("aside .messages .message.message--unread")
       end
     end
   end

@@ -64,19 +64,19 @@
       </nav>
       <article>
         <aside>
-          <ul class="list">
+          <ul class="messages">
             <% if messages.any? %>
               <% messages.each do |message| %>
-                <li class="list-item list-item--has-link list-item--<%= message.read? ? "read" : "unread" %><%= " list-item--active" if message == self.message %>">
-                  <%= link_to federal_offense.message_path(message.id), class: "list-item-link" do %>
-                    <span class="list-item-subtitle"><%= message_array(message.from) %></span>
-                    <span class="list-item-title"><%= message.subject %></span>
-                    <span class="list-item-body"><%= message.preview %></span>
+                <li class="message message--<%= message.read? ? "read" : "unread" %><%= " message--active" if message == self.message %>">
+                  <%= link_to federal_offense.message_path(message.id), class: "message-link" do %>
+                    <span class="message-sender"><%= message_array(message.from) %></span>
+                    <span class="message-subject"><%= message.subject %></span>
+                    <span class="message-preview"><%= message.preview %></span>
                   <% end%>
                 </li>
               <% end %>
             <% else %>
-              <li class="list-item empty">
+              <li class="message empty">
                 <div class="empty-title"><%= t("federal_offense.empty.title") %></div>
                 <div class="empty-subtitle"><%= t("federal_offense.empty.subtitle") %></div>
               </li>

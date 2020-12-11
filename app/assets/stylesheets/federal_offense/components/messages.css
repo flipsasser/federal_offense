@@ -1,18 +1,19 @@
-.list {
+.messages {
   display: flex;
   flex-direction: column;
   flex: 1;
   list-style-type: none;
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
-.list .list-item {
+.messages .message {
   position: relative;
 }
 
 /* Link styling */
-.list .list-item .list-item-link {
+.messages .message .message-link {
   color: inherit;
   display: block;
   padding: 1rem 1rem 1rem 2rem;
@@ -20,38 +21,36 @@
 }
 
 /* Text content */
-.list .list-item .list-item-title,
-.list .list-item .list-item-subtitle,
-.list .list-item .list-item-content {
+.messages .message .message-sender,
+.messages .message .message-subject,
+.messages .message .message-preview {
   display: block;
 }
 
-.list .list-item .list-item-title,
-.list .list-item .list-item-subtitle {
-  max-width: 100%;
+.messages .message .message-sender,
+.messages .message .message-subject {
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  width: 100%;
 }
 
-.list .list-item .list-item-subtitle {
+.messages .message .message-sender {
   color: gray;
   font-size: 0.8rem;
 }
 
-.list .list-item .list-item-title {
-}
-
-.list .list-item .list-item-content {
+.messages .message .message-preview {
   font-size: 0.6rem;
 }
 
 /* Adjacent list items */
-.list .list-item + .list-item {
+.messages .message + .message {
   border-top: 1px solid lightgray;
 }
 
 /* Status indicators */
-.list .list-item.list-item--unread::before {
+.messages .message.message--unread::before {
   border-radius: 1000px;
   content: "";
   height: 0.5rem;
@@ -63,25 +62,25 @@
   width: 0.5rem;
 }
 
-.list .list-item.list-item--unread::before {
+.messages .message.message--unread::before {
   background-color: steelblue;
 }
 
 /* Active state */
-.list .list-item.list-item--active {
+.messages .message.message--active {
   background-color: steelblue;
 }
 
-.list-item.list-item--active.list-item--unread::before {
+.message.message--active.message--unread::before {
   background-color: white !important;
 }
 
-.list .list-item.list-item--active .list-item-link,
-.list .list-item.list-item--active .list-item-subtitle {
+.messages .message.message--active .message-link,
+.messages .message.message--active .message-sender {
   color: white;
 }
 
-.list .list-item.list-item--active + .list-item,
-.list .list-item + .list-item.list-item--active {
+.messages .message.message--active + .message,
+.messages .message + .message.message--active {
   border-top-color: steelblue;
 }
